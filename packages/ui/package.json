@@ -1,0 +1,9 @@
+{
+  "name": "@cli-template/ui",
+  "scripts": {
+    "build": "echo \"Building at the speed of Turbo.\" > output-file.txt && cat output-file.txt"
+  },
+  "dependencies": {
+    "@cli-template/tooling-config": "*"
+  }
+}
