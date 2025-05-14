@@ -9,7 +9,9 @@ export const controlledPromise = () => {
 
   return {
     promise: controlledPromise,
-    resolve: resolve,
+    // @ts-expect-error
+    resolve,
+    // @ts-expect-error
     reject,
   }
 }

@@ -1,3 +1,5 @@
+import { sleep } from '@cli-template/utils'
+
 export type ShortTaskOptions = {
   taskName: string
   taskDescription: string
@@ -15,7 +17,7 @@ export const shortTask = async (options: ShortTaskOptions) => {
   console.log('Task created successfully!')
   console.log('You can now start working on your task.')
 
-  await sleep(taskDuration * 60 * 1000) // Simulate task duration
+  await sleep(taskDuration * 1000) // Simulate task duration
   console.log(`Task "${taskName}" completed!`)
 
   return 1

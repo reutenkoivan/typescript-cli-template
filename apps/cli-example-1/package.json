@@ -5,9 +5,19 @@
     "cli-example-1": "cli-entry.js"
   },
   "scripts": {
-    "build": "mkdir -p dist && echo \"Your application output!\" > dist/app-output.txt && echo \"Application B is built!\""
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "lint:types": "tsc --noEmit"
   },
-  "dependencies": {
-    "@cli-template/tooling-config": "*"
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "devDependencies": {
+    "@cli-template/typescript-config": "*",
+    "@types/node": "20.14.0",
+    "typescript": "5.8.3"
+  },
+  "peerDependencies": {
+    "typescript": ">=5.8.0",
+    "@types/node": ">=20.14.0"
   }
 }

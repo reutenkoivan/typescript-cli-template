@@ -5,6 +5,6 @@
     "build": "mkdir -p dist && echo \"Your application output!\" > dist/app-output.txt && echo \"Application A is built!\""
   },
   "dependencies": {
-    "@cli-template/tooling-config": "*"
+    "@cli-template/typescript-config": "*"
   }
 }

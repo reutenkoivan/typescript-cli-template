@@ -1,10 +1,18 @@
 {
   "name": "@cli-template/utils",
   "scripts": {
-    "prebuild": "echo \"Executing pre-build step...\"",
-    "build": "echo \"Welcome to the Turboverse.\" > output-file.txt && cat output-file.txt"
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "lint:types": "tsc --noEmit"
   },
-  "dependencies": {
-    "@cli-template/tooling-config": "*"
+  "main": "dist/index.js",
+  "devDependencies": {
+    "@cli-template/typescript-config": "*",
+    "@types/node": "20.14.0",
+    "typescript": "5.8.3"
+  },
+  "peerDependencies": {
+    "typescript": ">=5.8.0",
+    "@types/node": ">=20.14.0"
   }
 }

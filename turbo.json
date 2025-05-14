@@ -2,10 +2,16 @@
   "$schema": "https://turborepo.com/schema.json",
   "tasks": {
     "build": {
-      "dependsOn": ["prebuild", "^build"],
-      "outputs": ["output-file.txt", "dist/**"]
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
     },
-    "prebuild": {},
+    "dev": {},
+    "topo": {
+      "dependsOn": ["^topo"]
+    },
+    "lint:types": {
+      "dependsOn": ["topo"]
+    },
     "//#lint": {},
     "//#lint:fix": {
       "cache": false
