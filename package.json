@@ -3,11 +3,16 @@
   "description": "A barebones Turborepo example for working with Task Graphs.",
   "private": true,
   "scripts": {
-    "lint": "biome check .",
-    "lint:fix": "biome check . --write"
+    "check": "bun lint:code && bun lint:deps",
+    "check:fix": "bun lint:code:fix && bun lint:deps:fix",
+    "lint:code": "biome check .",
+    "lint:code:fix": "biome check . --write",
+    "lint:deps": "sherif",
+    "lint:deps:fix": "sherif --fix"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "sherif": "^1.5.0",
     "turbo": "^2.5.3"
   },
   "packageManager": "bun@1.2.10",
