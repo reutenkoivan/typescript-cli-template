@@ -17,10 +17,12 @@
       },
       "dependencies": {
         "commander": "^13.1.0",
+        "debug": "^4.4.1",
         "zod": "^3.24.4",
       },
       "devDependencies": {
         "@cli-template/typescript-config": "*",
+        "@types/debug": "^4.1.12",
         "@types/node": "20.14.0",
         "typescript": "5.8.3",
       },
@@ -79,9 +81,17 @@
 
     "@cli-template/utils": ["@cli-template/utils@workspace:packages/utils"],
 
+    "@types/debug": ["@types/debug@4.1.12", "", { "dependencies": { "@types/ms": "*" } }, "sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ=="],
+
+    "@types/ms": ["@types/ms@2.1.0", "", {}, "sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA=="],
+
     "@types/node": ["@types/node@20.14.0", "", { "dependencies": { "undici-types": "~5.26.4" } }, "sha512-5cHBxFGJx6L4s56Bubp4fglrEpmyJypsqI6RgzMfBHWUJQGWAAi8cWcgetEbZXHYXo9C2Fa4EEds/uSyS4cxmA=="],
 
     "commander": ["commander@13.1.0", "", {}, "sha512-/rFeCpNJQbhSZjGVwO9RFV3xPqbnERS8MmIQzCtD/zl6gpJuV/bMLuN92oG3F7d8oDEHHRrujSXNUr8fpjntKw=="],
+
+    "debug": ["debug@4.4.1", "", { "dependencies": { "ms": "^2.1.3" } }, "sha512-KcKCqiftBJcZr++7ykoDIEwSa3XWowTfNPo92BYxjXiyYEVrUQh2aLyhxBCwww+heortUFxEJYcRzosstTEBYQ=="],
+
+    "ms": ["ms@2.1.3", "", {}, "sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA=="],
 
     "sherif": ["sherif@1.5.0", "", { "optionalDependencies": { "sherif-darwin-arm64": "1.5.0", "sherif-darwin-x64": "1.5.0", "sherif-linux-arm64": "1.5.0", "sherif-linux-x64": "1.5.0", "sherif-windows-arm64": "1.5.0", "sherif-windows-x64": "1.5.0" }, "bin": { "sherif": "index.js" } }, "sha512-sCn0w5b3APLRJauj4UDaK5TV5fyuc1ndDGv2cgt0lnb7zVUAekFm6D2duHVg4sf8/ZlDGFcLRc9Y/DxSRXdOAA=="],
 

@@ -1,5 +1,6 @@
 import { sleep } from '@cli-template/utils'
 import { z } from 'zod'
+import { debug } from '../debug'
 
 const shortTaskOptionsSchema = z.object({
   arg: z.string().min(1, 'Task name is required'),
@@ -12,11 +13,16 @@ const shortTaskOptionsSchema = z.object({
 
 type ShortTaskOptions = z.infer<typeof shortTaskOptionsSchema>
 
+const shortTaskActionDebug = debug('shortTaskAction')
+
 export const shortTaskAction = async (props: ShortTaskOptions) => {
+  shortTaskActionDebug(`arg "${props.arg}"`)
+  shortTaskActionDebug(`options ${JSON.stringify(props.options)}`)
+
   const { arg, options } = shortTaskOptionsSchema.parse(props)
 
-  console.log(`Task Name: ${arg}`)
-  console.log(`Task Options: ${JSON.stringify(options)}`)
+  shortTaskActionDebug(`parsed arg "${arg}"`)
+  shortTaskActionDebug(`parsed options ${JSON.stringify(options)}`)
 
   // Simulate task duration
   await sleep(2000) // 2 seconds
