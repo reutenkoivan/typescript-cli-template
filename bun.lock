@@ -14,14 +14,13 @@
       "bin": {
         "cli-example-1": "cli-entry.js",
       },
+      "dependencies": {
+        "commander": "^13.1.0",
+      },
       "devDependencies": {
         "@cli-template/typescript-config": "*",
         "@types/node": "20.14.0",
         "typescript": "5.8.3",
-      },
-      "peerDependencies": {
-        "@types/node": ">=20.14.0",
-        "typescript": ">=5.8.0",
       },
     },
     "apps/documentation": {
@@ -46,10 +45,6 @@
         "@cli-template/typescript-config": "*",
         "@types/node": "20.14.0",
         "typescript": "5.8.3",
-      },
-      "peerDependencies": {
-        "@types/node": ">=20.14.0",
-        "typescript": ">=5.8.0",
       },
     },
   },
@@ -83,6 +78,8 @@
     "@cli-template/utils": ["@cli-template/utils@workspace:packages/utils"],
 
     "@types/node": ["@types/node@20.14.0", "", { "dependencies": { "undici-types": "~5.26.4" } }, "sha512-5cHBxFGJx6L4s56Bubp4fglrEpmyJypsqI6RgzMfBHWUJQGWAAi8cWcgetEbZXHYXo9C2Fa4EEds/uSyS4cxmA=="],
+
+    "commander": ["commander@13.1.0", "", {}, "sha512-/rFeCpNJQbhSZjGVwO9RFV3xPqbnERS8MmIQzCtD/zl6gpJuV/bMLuN92oG3F7d8oDEHHRrujSXNUr8fpjntKw=="],
 
     "sherif": ["sherif@1.5.0", "", { "optionalDependencies": { "sherif-darwin-arm64": "1.5.0", "sherif-darwin-x64": "1.5.0", "sherif-linux-arm64": "1.5.0", "sherif-linux-x64": "1.5.0", "sherif-windows-arm64": "1.5.0", "sherif-windows-x64": "1.5.0" }, "bin": { "sherif": "index.js" } }, "sha512-sCn0w5b3APLRJauj4UDaK5TV5fyuc1ndDGv2cgt0lnb7zVUAekFm6D2duHVg4sf8/ZlDGFcLRc9Y/DxSRXdOAA=="],
 
