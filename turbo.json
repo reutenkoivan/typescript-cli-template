@@ -12,6 +12,16 @@
     },
     "lint:types": {
       "dependsOn": ["topo"]
+    },
+    "transit": {
+      "dependsOn": ["^transit"]
+    },
+    "test": {
+      "dependsOn": ["^test"]
+    },
+    "test:watch": {
+      "cache": false,
+      "persistent": true
     }
   }
 }

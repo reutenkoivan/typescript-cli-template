@@ -19,8 +19,8 @@
   },
   "devDependencies": {
     "@cli-template/typescript-config": "*",
-    "@types/node": "20.14.0",
     "@types/debug": "^4.1.12",
+    "@types/node": "20.14.0",
     "typescript": "5.8.3"
   }
 }
