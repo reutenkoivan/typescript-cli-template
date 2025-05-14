@@ -1,5 +1,6 @@
 {
   "$schema": "https://turborepo.com/schema.json",
+  "ui": "tui",
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
@@ -11,10 +12,6 @@
     },
     "lint:types": {
       "dependsOn": ["topo"]
-    },
-    "//#lint": {},
-    "//#lint:fix": {
-      "cache": false
     }
   }
 }

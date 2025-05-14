@@ -1,24 +1,27 @@
 import { sleep } from '@cli-template/utils'
+import { z } from 'zod'
 
-export type ShortTaskOptions = {
-  taskName: string
-  taskDescription: string
-  taskDuration: number
-  taskPriority: 'low' | 'medium' | 'high'
-}
+const shortTaskOptionsSchema = z.object({
+  arg: z.string().min(1, 'Task name is required'),
+  options: z.object({
+    booleanKey: z.boolean().optional(),
+    templateOption: z.string(),
+    numberOption: z.coerce.number().optional(),
+  }),
+})
 
-export const shortTask = async (options: ShortTaskOptions) => {
-  const { taskName, taskDescription, taskDuration, taskPriority } = options
+type ShortTaskOptions = z.infer<typeof shortTaskOptionsSchema>
 
-  console.log(`Task Name: ${taskName}`)
-  console.log(`Task Description: ${taskDescription}`)
-  console.log(`Task Duration: ${taskDuration} minutes`)
-  console.log(`Task Priority: ${taskPriority}`)
-  console.log('Task created successfully!')
-  console.log('You can now start working on your task.')
+export const shortTaskAction = async (props: ShortTaskOptions) => {
+  const { arg, options } = shortTaskOptionsSchema.parse(props)
 
-  await sleep(taskDuration * 1000) // Simulate task duration
-  console.log(`Task "${taskName}" completed!`)
+  console.log(`Task Name: ${arg}`)
+  console.log(`Task Options: ${JSON.stringify(options)}`)
 
-  return 1
+  // Simulate task duration
+  await sleep(2000) // 2 seconds
+
+  console.log(`Task "${arg}" completed!`)
+
+  return 0
 }
