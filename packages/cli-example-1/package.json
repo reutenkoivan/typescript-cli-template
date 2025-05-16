@@ -10,8 +10,13 @@
     "build": "tsc",
     "lint:types": "tsc --noEmit"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    "./shortTask.js": {
+      "import": "./dist/shortTask.js",
+      "type": "./dist/shortTask.d.ts"
+    }
+  },
   "dependencies": {
     "commander": "^13.1.0",
     "debug": "^4.4.1",

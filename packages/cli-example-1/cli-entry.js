@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
-const { Command } = require('commander')
-const { shortTaskAction } = require('@cli-template/cli-example-1')
-const packageJson = require('./package.json')
+import fs from 'node:fs'
+import path from 'node:path'
+import { shortTaskAction } from '@cli-template/cli-example-1/shortTask.js'
+import { Command } from 'commander'
+
+const packageJsonPath = path.resolve(import.meta.dirname, './package.json')
+const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'))
 
 const program = new Command()
 program.name(packageJson.name).description(packageJson.description).version(packageJson.version)

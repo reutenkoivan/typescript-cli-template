@@ -1,6 +1,6 @@
-import { sleep } from '@cli-template/utils'
+import { sleep } from '@cli-template/utils/sleep'
 import { z } from 'zod'
-import { debug } from '../debug'
+import { debug } from './debug.js'
 
 const shortTaskOptionsSchema = z.object({
   arg: z.string().min(1, 'Task name is required'),

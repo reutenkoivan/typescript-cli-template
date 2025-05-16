@@ -1,6 +1,8 @@
 {
   "extends": "@cli-template/typescript-config/base.json",
   "compilerOptions": {
+    "baseUrl": "./",
+    "declarationDir": "dist",
     "outDir": "dist"
   },
   "include": ["src"],
