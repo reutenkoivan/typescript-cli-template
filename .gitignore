@@ -12,11 +12,18 @@ node_modules
 .turbo
 
 # Build Outputs
-output-file.txt
-a-different-file.txt
 dist
+build
+.docusaurus
+.cache-loader
+
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Debug
+*-debug.log*
 
 # Misc
 .DS_Store

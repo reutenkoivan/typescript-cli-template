@@ -2,19 +2,22 @@
   "name": "cli-template",
   "description": "A barebones Turborepo example for working with Task Graphs.",
   "private": true,
+  "packageManager": "bun@1.2.10",
+  "workspaces": ["configs/*", "packages/*", "libs/*"],
   "scripts": {
-    "check": "bun lint:code && bun lint:deps",
-    "check:fix": "bun lint:code:fix && bun lint:deps:fix",
     "lint:code": "biome check .",
     "lint:code:fix": "biome check . --write",
     "lint:deps": "sherif",
-    "lint:deps:fix": "sherif --fix"
+    "lint:deps:fix": "sherif --fix",
+    "#": "================================================================",
+    "check": "turbo run lint:code lint:deps --ui=stream",
+    "check:fix": "turbo run lint:code:fix lint:deps:fix --ui=stream",
+    "doc:start": "turbo doc:start",
+    "apps:dev": "turbo run dev"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "sherif": "^1.5.0",
     "turbo": "^2.5.3"
-  },
-  "packageManager": "bun@1.2.10",
-  "workspaces": ["apps/*", "packages/*"]
+  }
 }

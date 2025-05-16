@@ -1,7 +1,7 @@
 {
   "name": "@cli-template/ui",
   "scripts": {
-    "build": "echo \"Building at the speed of Turbo.\" > output-file.txt && cat output-file.txt"
+    "build": "echo \"Building at the speed of Turbo.\""
   },
   "dependencies": {
     "@cli-template/typescript-config": "*"

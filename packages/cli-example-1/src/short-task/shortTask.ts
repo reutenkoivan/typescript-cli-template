@@ -5,15 +5,36 @@ import { debug } from '../debug'
 const shortTaskOptionsSchema = z.object({
   arg: z.string().min(1, 'Task name is required'),
   options: z.object({
-    booleanKey: z.boolean().optional(),
-    templateOption: z.string(),
-    numberOption: z.coerce.number().optional(),
+    booleanKey: z.boolean().optional().default(false),
+    templateOption: z.string().default('default template'),
+    numberOption: z.coerce.number().optional().default(0),
   }),
 })
 
 type ShortTaskOptions = z.infer<typeof shortTaskOptionsSchema>
 
 const shortTaskActionDebug = debug('shortTaskAction')
+
+// Test!!!!! Create reporter!!!!
+const parseSchema = (schema: z.ZodSchema, data: unknown) => {
+  const result = schema.safeParse(data)
+
+  if (!result.success) {
+    const errors = result.error.format()
+
+    const formattedErrors = Object.entries(errors).reduce(
+      (acc, [key, value]) => {
+        // @ts-ignore
+        acc[key] = value._errors
+        return acc
+      },
+      {} as Record<string, string[]>,
+    )
+    throw new Error(`Validation failed: ${JSON.stringify(formattedErrors)}`)
+  }
+
+  return result.data as z.infer<typeof schema>
+}
 
 export const shortTaskAction = async (props: ShortTaskOptions) => {
   shortTaskActionDebug(`arg "${props.arg}"`)

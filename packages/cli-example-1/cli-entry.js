@@ -15,8 +15,9 @@ program
   .option('-t, --template-option <char>', 'Template option', '===')
   .option('--number-option <number>', 'Number option', '1')
   .action(async (arg, options) => {
+    // TODO: Fix types in IDE
     const exitCode = await shortTaskAction({ arg, options })
-    process.exit(exitCode)
+    process.exitCode = exitCode
   })
 
 program.parse()

@@ -28,6 +28,14 @@
     "test:ui": {
       "cache": false,
       "persistent": true
+    },
+    "//#lint:code": {},
+    "//#lint:deps": {},
+    "//#lint:code:fix": {
+      "cache": false
+    },
+    "//#lint:deps:fix": {
+      "cache": false
     }
   }
 }
