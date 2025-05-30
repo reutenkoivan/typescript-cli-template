@@ -1,8 +1,22 @@
 {
   "name": "@cli-template/typescript-config",
+  "type": "module",
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "lint:types": "tsc --noEmit"
+  },
+  "exports": {
+    "./base.json": "./base.json",
+    "./documentation.json": "./documentation.json",
+    ".": {
+      "import": "./dist/declarations.js",
+      "type": "./dist/declarations.d.ts"
+    }
+  },
   "publishConfig": {
     "access": "public"
   }

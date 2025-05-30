@@ -12,14 +12,11 @@
   },
   "type": "module",
   "exports": {
-    "./shortTask.js": {
-      "import": "./dist/shortTask.js",
-      "type": "./dist/shortTask.d.ts"
-    }
+    "./taskExample": "./dist/taskExample/index.js",
+    "./taskExample/": "./dist/taskExample/"
   },
   "dependencies": {
     "commander": "^13.1.0",
-    "debug": "^4.4.1",
     "zod": "^3.24.4"
   },
   "devDependencies": {
