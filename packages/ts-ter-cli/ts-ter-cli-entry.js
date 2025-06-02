@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import path from 'node:path'
-import { initTaskExample } from '@cli-template/cli-example-1/taskExample'
+import { tsTerInit } from '@repo/ts-ter-cli/ts-ter-init'
 
 const packageJsonPath = path.resolve(import.meta.dirname, './package.json')
 
-initTaskExample(packageJsonPath)
+tsTerInit(packageJsonPath)

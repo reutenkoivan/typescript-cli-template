@@ -1,8 +1,6 @@
 {
-  "extends": "@docusaurus/tsconfig",
+  "extends": "@repo/typescript-config/documentation.json",
   "compilerOptions": {
-    "baseUrl": "./",
-    "types": ["@docusaurus/module-type-aliases", "@docusaurus/theme-classic"]
-  },
-  "exclude": [".docusaurus", "build"]
+    "baseUrl": "./"
+  }
 }

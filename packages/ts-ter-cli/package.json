@@ -1,0 +1,43 @@
+{
+  "name": "@repo/ts-ter-cli",
+  "description": "A workspace to use as a model for a final application that the rest of your dependencies are building towards.",
+  "version": "0.0.1",
+  "bin": {
+    "ts-ter-cli": "ts-ter-cli-entry.js"
+  },
+  "scripts": {
+    "dev": "bun run build --watch",
+    "build": "tsdown --format cjs --format esm",
+    "lint:types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "commander": "^13.1.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "@types/debug": "^4.1.12",
+    "@types/node": "20.14.0",
+    "tsdown": "^0.12.6",
+    "typescript": "5.8.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "type": "module",
+  "exports": {
+    "./cat-command": {
+      "import": "./dist/cat-command.js",
+      "require": "./dist/cat-command.cjs"
+    },
+    "./ls-command": {
+      "import": "./dist/ls-command.js",
+      "require": "./dist/ls-command.cjs"
+    },
+    "./ts-ter-init": {
+      "import": "./dist/ts-ter-init.js",
+      "require": "./dist/ts-ter-init.cjs"
+    },
+    "./package.json": "./package.json"
+  }
+}
