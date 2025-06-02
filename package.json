@@ -10,6 +10,7 @@
     "lint:deps": "sherif",
     "lint:deps:fix": "sherif --fix",
     "#": "================================================================",
+    "dev": "turbo run dev",
     "check": "turbo run lint:code lint:deps --ui=stream",
     "check:fix": "turbo run lint:code:fix lint:deps:fix --ui=stream",
     "doc:start": "turbo doc:start"

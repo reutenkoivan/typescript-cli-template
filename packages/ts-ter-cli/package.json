@@ -11,8 +11,9 @@
     "lint:types": "tsc --noEmit"
   },
   "dependencies": {
+    "@repo/utils": "*",
     "commander": "^13.1.0",
-    "zod": "^3.24.4"
+    "zod": "^3.25.48"
   },
   "devDependencies": {
     "@repo/typescript-config": "*",

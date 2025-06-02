@@ -1,8 +1,8 @@
-import type { VoidFunction } from '@repo/typescript-config'
 import * as winston from 'winston'
+import z from 'zod/v4'
 import { Elements } from './elements.js'
 
-type LoggerConfig = {
+export type LoggerConfig = {
   namespace: string
   level?: winston.Logger['level']
   filePath?: string
@@ -12,8 +12,10 @@ type LoggerConfig = {
 export class Logger {
   private print: winston.Logger
   private elements = new Elements()
+  private config: LoggerConfig
 
   constructor(config: LoggerConfig) {
+    this.config = config
     this.print = winston.createLogger({
       level: config.level ?? 'info',
       transports: [new winston.transports.Console({ format: winston.format.cli({ all: true }) })],
@@ -36,12 +38,22 @@ export class Logger {
     }
   }
 
+  extend(config: Partial<LoggerConfig> & Pick<LoggerConfig, 'namespace'>): Logger {
+    return new Logger({ ...this.config, ...config, namespace: `${this.config.namespace}:${config.namespace}` })
+  }
+
   log(message: string) {
     this.print.info(message)
   }
 
   error(message: string) {
     this.print.error(message)
+  }
+
+  zodError(error: z.ZodError) {
+    for (const line of z.prettifyError(error).split('\n')) {
+      this.print.error(line)
+    }
   }
 
   header(text: string) {

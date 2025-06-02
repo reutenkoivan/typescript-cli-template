@@ -21,6 +21,16 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "nursery": {
+        "noCommonJs": "error",
+        "useImportRestrictions": "error"
+      },
+      "correctness": {
+        "noUnusedImports": "error"
+      },
+      "performance": {
+        "useTopLevelRegex": "error"
+      },
       "suspicious": {
         "noArrayIndexKey": "off"
       }

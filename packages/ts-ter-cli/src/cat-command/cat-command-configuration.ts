@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from 'zod/v4'
 
 export const CAT_OUTPUT_OPTIONS = {
   file: 'file',
@@ -27,7 +27,18 @@ const CatCommandOptionsSchema = z
     },
   )
 
-export type CatCommandOptionsType = z.infer<typeof CatCommandOptionsSchema>
+type CatCommandOptionsType = z.infer<typeof CatCommandOptionsSchema>
+
+/* === Internal contract === */
+
+const CatCommandConfigSchema = z.object({
+  argument: CatCommandArgumentSchema,
+  options: CatCommandOptionsSchema,
+})
+
+export type CatCommandConfigType = z.infer<typeof CatCommandConfigSchema>
+
+/* === /Internal contract === */
 
 export const parseCatOptions = <T extends CatCommandOptionsType>(argument: string, options: T) => {
   const argsEnvMapping = {
@@ -35,8 +46,8 @@ export const parseCatOptions = <T extends CatCommandOptionsType>(argument: strin
     outputFile: process.env.CAT_OUTPUT_FILE ?? options.outputFile,
   }
 
-  return {
-    argument: CatCommandArgumentSchema.parse(argument),
-    options: CatCommandOptionsSchema.parse(argsEnvMapping),
-  }
+  return CatCommandConfigSchema.safeParse({
+    argument,
+    options: argsEnvMapping,
+  })
 }

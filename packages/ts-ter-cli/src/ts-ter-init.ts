@@ -1,6 +1,6 @@
 import { Command } from 'commander'
 
-import { Logger } from '@repo/utils/logger'
+import { createActionContext } from '@repo/utils/actionContext'
 import { parsePackageJson } from '@repo/utils/parse-package-json'
 import {
   CAT_COMMAND_DEFAULT_OPTIONS,
@@ -9,8 +9,11 @@ import {
   parseCatOptions,
 } from './cat-command/index.js'
 
-const logger = new Logger({
-  namespace: 'ts-ter',
+const actionCtx = createActionContext({
+  logger: {
+    namespace: 'ts-ter',
+  },
+  debug: 'ts-ter',
 })
 
 export const tsTerInit = (packageJsonPath: string) => {
@@ -31,10 +34,16 @@ export const tsTerInit = (packageJsonPath: string) => {
     .option('--output-file <outputFile>', 'Output file path. Can be set with the CAT_OUTPUT_FILE env variable.')
     .option('--debug', 'Enable debug', CAT_COMMAND_DEFAULT_OPTIONS.debug)
     .action(async (argument, options) => {
-      logger.header('ts-ter cat command...')
+      actionCtx.logger.header('ts-ter cat command...')
+
       const cliConfig = parseCatOptions(argument, options)
 
-      await catCommandAction(cliConfig.argument, cliConfig.options)
+      if (cliConfig.error) {
+        actionCtx.logger.zodError(cliConfig.error)
+        process.exit(1)
+      }
+
+      await catCommandAction(cliConfig.data, actionCtx)
     })
 
   program
@@ -43,7 +52,7 @@ export const tsTerInit = (packageJsonPath: string) => {
     .argument('<directory>', 'Directory to list')
     .option('--recursive', 'List files recursively', false)
     .action(async (options) => {
-      logger.header('ts-ter ls command...')
+      actionCtx.logger.header('ts-ter ls command...')
     })
 
   program.parse()

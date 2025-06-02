@@ -1,9 +1,11 @@
 import debug from 'debug'
 
+export type DebugConfig = string | string[]
+
 export class Debug {
   private namespace: string
 
-  constructor(namespace: string | string[]) {
+  constructor(namespace: DebugConfig) {
     this.namespace = Array.isArray(namespace) ? namespace.join(':') : namespace
   }
 
@@ -24,5 +26,11 @@ export class Debug {
   }
   error(...args: unknown[]): void {
     debug(`${this.namespace}:error`)(this.formatMessage(args))
+  }
+
+  extend(namespace: DebugConfig): Debug {
+    return new Debug(
+      Array.isArray(namespace) ? [...this.namespace.split(':'), ...namespace] : `${this.namespace}:${namespace}`,
+    )
   }
 }
