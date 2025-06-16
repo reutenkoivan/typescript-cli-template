@@ -1,9 +1,0 @@
-{
-  "name": "@repo/ui",
-  "scripts": {
-    "build": "echo \"Building at the speed of Turbo.\""
-  },
-  "dependencies": {
-    "@repo/typescript-config": "*"
-  }
-}

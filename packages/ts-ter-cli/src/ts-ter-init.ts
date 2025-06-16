@@ -1,23 +1,33 @@
 import { Command } from 'commander'
 
-import { createActionContext } from '@repo/utils/actionContext'
-import { parsePackageJson } from '@repo/utils/parse-package-json'
+import { Debug } from '@repo/debug'
+import { parsePackageJson } from '@repo/file-system/parsePackageJson'
+import { Logger } from '@repo/logger'
 import {
   CAT_COMMAND_DEFAULT_OPTIONS,
   CAT_OUTPUT_OPTIONS,
   catCommandAction,
   parseCatOptions,
 } from './cat-command/index.js'
+import type { ActionContextType } from './types.js'
 
-const actionCtx = createActionContext({
-  logger: {
-    namespace: 'ts-ter',
-  },
-  debug: 'ts-ter',
-})
+const actionCtx: ActionContextType = {
+  logger: new Logger({
+    namespace: '@repo/ts-ter-cli',
+  }),
+  debug: new Debug('@repo/ts-ter-cli'),
+}
 
 export const tsTerInit = (packageJsonPath: string) => {
-  const packageJson = parsePackageJson(packageJsonPath)
+  actionCtx.debug.log('Initializing ts-ter CLI...')
+  const parsePackageJsonResult = parsePackageJson(packageJsonPath)
+
+  if (parsePackageJsonResult.isErr()) {
+    actionCtx.logger.error('Failed to parse package.json')
+    process.exit(1)
+  }
+
+  const packageJson = parsePackageJsonResult.value
 
   const program = new Command()
   program.name(packageJson.name).description(packageJson.description).version(packageJson.version)
@@ -34,14 +44,19 @@ export const tsTerInit = (packageJsonPath: string) => {
     .option('--output-file <outputFile>', 'Output file path. Can be set with the CAT_OUTPUT_FILE env variable.')
     .option('--debug', 'Enable debug', CAT_COMMAND_DEFAULT_OPTIONS.debug)
     .action(async (argument, options) => {
+      actionCtx.debug.log('Command options:', { options, argument })
       actionCtx.logger.header('ts-ter cat command...')
 
       const cliConfig = parseCatOptions(argument, options)
 
       if (cliConfig.error) {
+        actionCtx.debug.error('Invalid command options:', cliConfig.error.message)
         actionCtx.logger.zodError(cliConfig.error)
+
         process.exit(1)
       }
+
+      actionCtx.debug.log('Parsed CLI config:', cliConfig.data)
 
       await catCommandAction(cliConfig.data, actionCtx)
     })

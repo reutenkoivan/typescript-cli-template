@@ -1,0 +1,51 @@
+{
+  "name": "@repo/file-system",
+  "version": "0.0.0-stub",
+  "license": "MIT",
+  "description": "File system utilities for the CLI template.",
+  "scripts": {
+    "dev": "bun run build --watch",
+    "build": "tsdown --format cjs --format esm",
+    "lint:types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "@types/node": "20.14.0",
+    "typescript": "5.8.3"
+  },
+  "dependencies": {
+    "@repo/debug": "*",
+    "neverthrow": "^8.2.0",
+    "zod": "^3.25.48"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "type": "module",
+  "exports": {
+    "./getFileStats": {
+      "import": "./dist/getFileStats.js",
+      "require": "./dist/getFileStats.cjs"
+    },
+    "./isFileExists": {
+      "import": "./dist/isFileExists.js",
+      "require": "./dist/isFileExists.cjs"
+    },
+    "./parseJson": {
+      "import": "./dist/parseJson.js",
+      "require": "./dist/parseJson.cjs"
+    },
+    "./parsePackageJson": {
+      "import": "./dist/parsePackageJson.js",
+      "require": "./dist/parsePackageJson.cjs"
+    },
+    "./readFile": {
+      "import": "./dist/readFile.js",
+      "require": "./dist/readFile.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/debug.cjs",
+  "module": "./dist/debug.js",
+  "types": "./dist/debug.d.cts"
+}

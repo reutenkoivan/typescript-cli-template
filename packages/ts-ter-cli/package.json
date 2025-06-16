@@ -11,7 +11,9 @@
     "lint:types": "tsc --noEmit"
   },
   "dependencies": {
-    "@repo/utils": "*",
+    "@repo/debug": "*",
+    "@repo/file-system": "*",
+    "@repo/logger": "*",
     "commander": "^13.1.0",
     "zod": "^3.25.48"
   },

@@ -1,0 +1,33 @@
+{
+  "name": "@repo/debug",
+  "version": "0.0.0-stub",
+  "license": "MIT",
+  "description": "Debug package for the CLI template.",
+  "scripts": {
+    "dev": "bun run build --watch",
+    "build": "tsdown --format cjs --format esm",
+    "lint:types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "@types/node": "20.14.0",
+    "typescript": "5.8.3"
+  },
+  "dependencies": {
+    "debug": "^4.4.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/debug.js",
+      "require": "./dist/debug.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/debug.cjs",
+  "module": "./dist/debug.js",
+  "types": "./dist/debug.d.cts"
+}
