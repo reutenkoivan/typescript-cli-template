@@ -1,50 +1,44 @@
-import { render, Text } from 'ink'
+import { Box, render, Text, useApp } from 'ink'
+import BigText from 'ink-big-text'
+import Gradient from 'ink-gradient'
+import Spinner from 'ink-spinner'
 import { type FC, useEffect, useState } from 'react'
 
-type CounterProps = {
-  signalResolver: () => void
-}
-
-const Counter: FC<CounterProps> = ({ signalResolver }) => {
+const Counter: FC = () => {
   const [counter, setCounter] = useState(0)
+  const { exit } = useApp()
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCounter((previousCounter) => {
         if (previousCounter >= 5) {
-          clearInterval(timer)
-          signalResolver()
-          return previousCounter
+          exit()
         }
 
         return previousCounter + 1
       })
-    }, 1000)
+    }, 500)
 
     return () => {
       clearInterval(timer)
     }
-  }, [signalResolver])
+  }, [exit])
 
-  return <Text color='green'>{counter} tests passed</Text>
-}
-
-const createControlledPromise = () => {
-  let resolve: () => void = () => {}
-  let reject: () => void = () => {}
-
-  const promise = new Promise((res, rej) => {
-    resolve = res as () => void
-    reject = rej
-  })
-
-  return { promise, reject, resolve }
+  return (
+    <Box margin={2} flexDirection='column'>
+      <Gradient name='rainbow'>
+        <BigText text='ink-cli' />
+      </Gradient>
+      <Box alignItems='center' height={3}>
+        <Spinner type='dots' />
+        <Text color='green'>{counter} tests passed</Text>
+      </Box>
+    </Box>
+  )
 }
 
 export const sampleCommandAction = () => {
-  const { promise, resolve } = createControlledPromise()
+  const { waitUntilExit } = render(<Counter />)
 
-  render(<Counter signalResolver={resolve} />)
-
-  return promise
+  return waitUntilExit()
 }

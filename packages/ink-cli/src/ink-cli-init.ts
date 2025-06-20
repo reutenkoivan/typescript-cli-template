@@ -33,6 +33,7 @@ export const inkCliInit = (packageJsonPath: string) => {
       actionCtx.logger.header('simple-cli ls command...')
       actionCtx.debug.log('Listing files in directory:', options)
       await sampleCommandAction()
+      actionCtx.debug.log('Sample command action completed')
     })
 
   program.parse()
