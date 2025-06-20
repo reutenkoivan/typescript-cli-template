@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "workspaces": {
+    "configs/typescript": {
+      "ignoreUnresolved": ["@docusaurus/module-type-aliases", "@docusaurus/theme-classic"]
+    },
+    "packages/documentation": {
+      "ignoreDependencies": ["@theme/*", "@docusaurus/docusaurus-plugin-theme-classic"]
+    }
+  }
+}

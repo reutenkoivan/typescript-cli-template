@@ -12,7 +12,7 @@ export type LoggerConfig = {
 export class Logger {
   private print: winston.Logger
   private elements = new Elements()
-  private config: LoggerConfig
+  private readonly config: LoggerConfig
 
   constructor(config: LoggerConfig) {
     this.config = config
@@ -33,7 +33,7 @@ export class Logger {
 
     if (config.errorFilePath) {
       this.print.add(
-        new winston.transports.File({ filename: config.errorFilePath, level: 'error', format: fileTransportFormat }),
+        new winston.transports.File({ filename: config.errorFilePath, format: fileTransportFormat, level: 'error' }),
       )
     }
   }

@@ -11,10 +11,12 @@
   "devDependencies": {
     "@repo/typescript-config": "*",
     "@types/node": "20.14.0",
+    "tsdown": "^0.12.6",
     "typescript": "5.8.3"
   },
   "dependencies": {
-    "debug": "^4.4.1"
+    "winston": "^3.17.0",
+    "zod": "^3.25.48"
   },
   "engines": {
     "node": ">=18.0.0"

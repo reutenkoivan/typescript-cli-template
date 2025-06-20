@@ -2,13 +2,13 @@ import { isFileExists } from '@repo/file-system/isFileExists'
 import { z } from 'zod/v4'
 
 export const CAT_OUTPUT_OPTIONS = {
-  file: 'file',
   console: 'console',
+  file: 'file',
 } as const
 
 export const CAT_COMMAND_DEFAULT_OPTIONS = {
-  output: CAT_OUTPUT_OPTIONS.console,
   debug: false,
+  output: CAT_OUTPUT_OPTIONS.console,
 } as const
 
 const CatCommandArgumentSchema = z.string().refine((val) => isFileExists(val).isOk(), {

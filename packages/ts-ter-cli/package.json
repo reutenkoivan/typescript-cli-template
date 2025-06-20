@@ -19,7 +19,6 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "*",
-    "@types/debug": "^4.1.12",
     "@types/node": "20.14.0",
     "tsdown": "^0.12.6",
     "typescript": "5.8.3"

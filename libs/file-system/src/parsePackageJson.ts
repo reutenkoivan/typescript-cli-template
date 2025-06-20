@@ -6,9 +6,9 @@ import { parseJson } from './parseJson.js'
 import { readFile } from './readFile.js'
 
 export const basePackageJsonSchema = z.object({
+  description: z.string(),
   name: z.string().min(1, 'Package name is required'),
   version: z.string().regex(/^\d+\.\d+\.\d+$/, 'Version must be in the format x.y.z'),
-  description: z.string(),
 })
 
 type BasePackageJsonType = z.infer<typeof basePackageJsonSchema>

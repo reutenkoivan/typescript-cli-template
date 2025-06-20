@@ -1,6 +1,6 @@
 {
-  "extends": "@repo/typescript-config/documentation.json",
-  "compilerOptions": {
-    "baseUrl": "./"
-  }
+	"compilerOptions": {
+		"baseUrl": "./"
+	},
+	"extends": "@repo/typescript-config/documentation.json"
 }

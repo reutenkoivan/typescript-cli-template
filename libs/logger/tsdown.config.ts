@@ -1,8 +1,8 @@
 import { defineConfig } from 'tsdown'
 
 export default defineConfig({
-  entry: ['./src/logger.ts'],
-  outDir: './dist',
   dts: true,
+  entry: ['./src/logger.ts'],
   exports: true,
+  outDir: './dist',
 })

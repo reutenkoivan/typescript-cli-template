@@ -1,8 +1,7 @@
-import { Command } from 'commander'
-
 import { Debug } from '@repo/debug'
 import { parsePackageJson } from '@repo/file-system/parsePackageJson'
 import { Logger } from '@repo/logger'
+import { Command } from 'commander'
 import {
   CAT_COMMAND_DEFAULT_OPTIONS,
   CAT_OUTPUT_OPTIONS,
@@ -12,10 +11,10 @@ import {
 import type { ActionContextType } from './types.js'
 
 const actionCtx: ActionContextType = {
+  debug: new Debug('@repo/ts-ter-cli'),
   logger: new Logger({
     namespace: '@repo/ts-ter-cli',
   }),
-  debug: new Debug('@repo/ts-ter-cli'),
 }
 
 export const tsTerInit = (packageJsonPath: string) => {
@@ -23,7 +22,7 @@ export const tsTerInit = (packageJsonPath: string) => {
   const parsePackageJsonResult = parsePackageJson(packageJsonPath)
 
   if (parsePackageJsonResult.isErr()) {
-    actionCtx.logger.error('Failed to parse package.json')
+    actionCtx.logger.error('Failed to load the cli')
     process.exit(1)
   }
 
@@ -44,7 +43,7 @@ export const tsTerInit = (packageJsonPath: string) => {
     .option('--output-file <outputFile>', 'Output file path. Can be set with the CAT_OUTPUT_FILE env variable.')
     .option('--debug', 'Enable debug', CAT_COMMAND_DEFAULT_OPTIONS.debug)
     .action(async (argument, options) => {
-      actionCtx.debug.log('Command options:', { options, argument })
+      actionCtx.debug.log('Command options:', { argument, options })
       actionCtx.logger.header('ts-ter cat command...')
 
       const cliConfig = parseCatOptions(argument, options)
@@ -68,6 +67,7 @@ export const tsTerInit = (packageJsonPath: string) => {
     .option('--recursive', 'List files recursively', false)
     .action(async (options) => {
       actionCtx.logger.header('ts-ter ls command...')
+      actionCtx.debug.log('Listing files in directory:', options)
     })
 
   program.parse()

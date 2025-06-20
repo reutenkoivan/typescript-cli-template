@@ -1,41 +1,45 @@
 {
   "$schema": "https://turborepo.com/schema.json",
-  "ui": "tui",
   "tasks": {
+    "//#lint:code": {},
+    "//#lint:code:fix": {
+      "cache": false
+    },
+    "//#lint:deps": {},
+    "//#lint:deps:fix": {
+      "cache": false
+    },
+    "//#lint:deps:versions": {},
+    "//#lint:deps:versions:fix": {
+      "cache": false
+    },
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
     "dev": {},
-    "doc:start": {},
     "doc:build": {},
-    "topo": {
-      "dependsOn": ["^topo"]
-    },
+    "doc:start": {},
     "lint:types": {
       "dependsOn": ["topo"]
     },
-    "transit": {
-      "dependsOn": ["^transit"]
-    },
     "test": {
       "dependsOn": ["^test"]
-    },
-    "test:watch": {
-      "cache": false,
-      "persistent": true
     },
     "test:ui": {
       "cache": false,
       "persistent": true
     },
-    "//#lint:code": {},
-    "//#lint:deps": {},
-    "//#lint:code:fix": {
-      "cache": false
+    "test:watch": {
+      "cache": false,
+      "persistent": true
     },
-    "//#lint:deps:fix": {
-      "cache": false
+    "topo": {
+      "dependsOn": ["^topo"]
+    },
+    "transit": {
+      "dependsOn": ["^transit"]
     }
-  }
+  },
+  "ui": "tui"
 }
