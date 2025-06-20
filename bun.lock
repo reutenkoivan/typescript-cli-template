@@ -79,11 +79,11 @@
         "typescript": "5.8.3",
       },
     },
-    "packages/ts-ter-cli": {
-      "name": "@repo/ts-ter-cli",
-      "version": "0.0.1",
+    "packages/simple-cli": {
+      "name": "@repo/simple-cli",
+      "version": "0.0.0",
       "bin": {
-        "ts-ter-cli": "ts-ter-cli-entry.js",
+        "simple-cli": "simple-cli-entry.js",
       },
       "dependencies": {
         "@repo/debug": "*",
@@ -533,7 +533,7 @@
 
     "@repo/logger": ["@repo/logger@workspace:libs/logger"],
 
-    "@repo/ts-ter-cli": ["@repo/ts-ter-cli@workspace:packages/ts-ter-cli"],
+    "@repo/simple-cli": ["@repo/simple-cli@workspace:packages/simple-cli"],
 
     "@repo/typescript-config": ["@repo/typescript-config@workspace:configs/typescript"],
 

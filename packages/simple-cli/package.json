@@ -1,9 +1,9 @@
 {
-  "name": "@repo/ts-ter-cli",
+  "name": "@repo/simple-cli",
   "description": "A workspace to use as a model for a final application that the rest of your dependencies are building towards.",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "bin": {
-    "ts-ter-cli": "ts-ter-cli-entry.js"
+    "simple-cli": "simple-cli-entry.js"
   },
   "scripts": {
     "dev": "bun run build --watch",
@@ -11,14 +11,14 @@
     "lint:types": "tsc --noEmit"
   },
   "dependencies": {
-    "@repo/debug": "*",
-    "@repo/file-system": "*",
-    "@repo/logger": "*",
+    "@repo/debug": "workspace:*",
+    "@repo/file-system": "workspace:*",
+    "@repo/logger": "workspace:*",
     "commander": "^13.1.0",
     "zod": "^3.25.48"
   },
   "devDependencies": {
-    "@repo/typescript-config": "*",
+    "@repo/typescript-config": "workspace:*",
     "@types/node": "20.14.0",
     "tsdown": "^0.12.6",
     "typescript": "5.8.3"
@@ -32,9 +32,9 @@
       "import": "./dist/cat-command.js",
       "require": "./dist/cat-command.cjs"
     },
-    "./ts-ter-init": {
-      "import": "./dist/ts-ter-init.js",
-      "require": "./dist/ts-ter-init.cjs"
+    "./simple-cli-init": {
+      "import": "./dist/simple-cli-init.js",
+      "require": "./dist/simple-cli-init.cjs"
     },
     "./package.json": "./package.json"
   }

@@ -17,10 +17,10 @@
     "lint:deps:versions:fix": "sherif --fix",
     "gitleaks": "gitleaks git -v",
     "#": "================================================================",
-    "dev": "turbo run dev",
     "check": "turbo run lint:code lint:deps lint:deps:versions --ui=stream",
     "check:fix": "turbo run lint:code:fix lint:deps:fix lint:deps:versions:fix --ui=stream",
-    "doc:start": "turbo doc:start"
+    "doc:start": "turbo doc:start",
+    "simple-cli:dev": "turbo run dev --filter=@repo/simple-cli..."
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.0",

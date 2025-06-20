@@ -29,7 +29,7 @@
 	"devDependencies": {
 		"@docusaurus/module-type-aliases": "3.7.0",
 		"@docusaurus/types": "3.7.0",
-		"@repo/typescript-config": "*",
+		"@repo/typescript-config": "workspace:*",
 		"typescript": "5.8.3"
 	},
 	"browserslist": {

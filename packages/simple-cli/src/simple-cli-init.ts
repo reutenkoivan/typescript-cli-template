@@ -11,13 +11,13 @@ import {
 import type { ActionContextType } from './types.js'
 
 const actionCtx: ActionContextType = {
-  debug: new Debug('@repo/ts-ter-cli'),
+  debug: new Debug('@repo/simple-cli'),
   logger: new Logger({
-    namespace: '@repo/ts-ter-cli',
+    namespace: '@repo/simple-cli',
   }),
 }
 
-export const tsTerInit = (packageJsonPath: string) => {
+export const simpleCliInit = (packageJsonPath: string) => {
   actionCtx.debug.log('Initializing ts-ter CLI...')
   const parsePackageJsonResult = parsePackageJson(packageJsonPath)
 
