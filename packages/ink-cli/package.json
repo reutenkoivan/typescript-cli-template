@@ -1,0 +1,45 @@
+{
+  "name": "@repo/ink-cli",
+  "description": "A package that provides a simple CLI interface for various commands.",
+  "version": "0.0.0",
+  "bin": {
+    "ink-cli": "cli-entry.js"
+  },
+  "scripts": {
+    "dev": "bun run build --watch",
+    "build": "tsdown --format cjs --format esm",
+    "lint:types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@repo/debug": "workspace:*",
+    "@repo/file-system": "workspace:*",
+    "@repo/logger": "workspace:*",
+    "commander": "^13.1.0",
+    "ink": "^6.0.0",
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "20.14.0",
+    "tsdown": "^0.12.6",
+    "typescript": "5.8.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "type": "module",
+  "exports": {
+    "./ink-cli": {
+      "import": "./dist/ink-cli.js",
+      "require": "./dist/ink-cli.cjs"
+    },
+    "./ink-cli-init": {
+      "import": "./dist/ink-cli-init.js",
+      "require": "./dist/ink-cli-init.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/ink-cli-init.cjs",
+  "module": "./dist/ink-cli-init.js",
+  "types": "./dist/ink-cli-init.d.cts"
+}

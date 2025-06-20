@@ -20,7 +20,8 @@
     "check": "turbo run lint:code lint:deps lint:deps:versions --ui=stream",
     "check:fix": "turbo run lint:code:fix lint:deps:fix lint:deps:versions:fix --ui=stream",
     "doc:start": "turbo doc:start",
-    "simple-cli:dev": "turbo run dev --filter=@repo/simple-cli..."
+    "simple-cli:dev": "turbo run dev --filter=@repo/simple-cli...",
+    "ink-cli:dev": "turbo run dev --filter=@repo/ink-cli..."
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.0",

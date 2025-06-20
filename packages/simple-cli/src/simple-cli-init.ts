@@ -18,7 +18,7 @@ const actionCtx: ActionContextType = {
 }
 
 export const simpleCliInit = (packageJsonPath: string) => {
-  actionCtx.debug.log('Initializing ts-ter CLI...')
+  actionCtx.debug.log('Initializing simple-cli CLI...')
   const parsePackageJsonResult = parsePackageJson(packageJsonPath)
 
   if (parsePackageJsonResult.isErr()) {
@@ -44,7 +44,7 @@ export const simpleCliInit = (packageJsonPath: string) => {
     .option('--debug', 'Enable debug', CAT_COMMAND_DEFAULT_OPTIONS.debug)
     .action(async (argument, options) => {
       actionCtx.debug.log('Command options:', { argument, options })
-      actionCtx.logger.header('ts-ter cat command...')
+      actionCtx.logger.header('simple-cli cat command...')
 
       const cliConfig = parseCatOptions(argument, options)
 
@@ -66,7 +66,7 @@ export const simpleCliInit = (packageJsonPath: string) => {
     .argument('<directory>', 'Directory to list')
     .option('--recursive', 'List files recursively', false)
     .action(async (options) => {
-      actionCtx.logger.header('ts-ter ls command...')
+      actionCtx.logger.header('simple-cli ls command...')
       actionCtx.debug.log('Listing files in directory:', options)
     })
 
