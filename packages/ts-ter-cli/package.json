@@ -32,10 +32,6 @@
       "import": "./dist/cat-command.js",
       "require": "./dist/cat-command.cjs"
     },
-    "./ls-command": {
-      "import": "./dist/ls-command.js",
-      "require": "./dist/ls-command.cjs"
-    },
     "./ts-ter-init": {
       "import": "./dist/ts-ter-init.js",
       "require": "./dist/ts-ter-init.cjs"
