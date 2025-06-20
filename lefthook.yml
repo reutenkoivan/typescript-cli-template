@@ -1,0 +1,8 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - run: bun run check:fix
+      runner: node
+
+    - run: bun run gitleaks
+      runner: node

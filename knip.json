@@ -1,6 +1,9 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
   "workspaces": {
+    ".": {
+      "ignoreBinaries": ["gitleaks"]
+    },
     "configs/typescript": {
       "ignoreUnresolved": ["@docusaurus/module-type-aliases", "@docusaurus/theme-classic"]
     },

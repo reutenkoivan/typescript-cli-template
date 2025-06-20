@@ -15,6 +15,7 @@
     "lint:deps:fix": "knip --fix",
     "lint:deps:versions": "sherif",
     "lint:deps:versions:fix": "sherif --fix",
+    "gitleaks": "gitleaks git -v",
     "#": "================================================================",
     "dev": "turbo run dev",
     "check": "turbo run lint:code lint:deps lint:deps:versions --ui=stream",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.0.0",
     "knip": "^5.61.2",
+    "lefthook": "^1.11.14",
     "sherif": "^1.5.0",
     "turbo": "^2.5.4"
   }
