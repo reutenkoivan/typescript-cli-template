@@ -25,7 +25,7 @@ const Counter: FC = () => {
   }, [exit])
 
   return (
-    <Box margin={2} flexDirection='column'>
+    <Box flexDirection='column' margin={2}>
       <Gradient name='rainbow'>
         <BigText text='ink-cli' />
       </Gradient>
