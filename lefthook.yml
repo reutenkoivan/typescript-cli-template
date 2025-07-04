@@ -4,5 +4,5 @@ pre-commit:
     - run: bun run check:fix
       runner: node
 
-    - run: bun run gitleaks
+    - run: bun run lint:secrets
       runner: node

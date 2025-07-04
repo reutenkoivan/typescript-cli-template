@@ -15,9 +15,10 @@
     "lint:deps:fix": "knip --fix",
     "lint:deps:versions": "sherif",
     "lint:deps:versions:fix": "sherif --fix",
-    "gitleaks": "gitleaks git -v",
+    "lint:deps:graph": "madge ./libs/** ./configs/** ./packages/** --exclude .docusaurus,.turbo,static --circular --extensions ts,tsx",
+    "lint:secrets": "gitleaks git -v",
     "#": "================================================================",
-    "check": "turbo run lint:code lint:deps lint:deps:versions --ui=stream",
+    "check": "turbo run lint:code lint:deps lint:deps:versions lint:deps:graph --ui=stream",
     "check:fix": "turbo run lint:code:fix lint:deps:fix lint:deps:versions:fix --ui=stream",
     "doc:start": "turbo doc:start",
     "simple-cli:dev": "turbo run dev --filter=@repo/simple-cli...",
@@ -27,6 +28,7 @@
     "@biomejs/biome": "2.0.0",
     "knip": "^5.61.2",
     "lefthook": "^1.11.14",
+    "madge": "^8.0.0",
     "sherif": "^1.5.0",
     "turbo": "^2.5.4"
   }

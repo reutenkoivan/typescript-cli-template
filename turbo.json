@@ -9,6 +9,7 @@
     "//#lint:deps:fix": {
       "cache": false
     },
+    "//#lint:deps:graph": {},
     "//#lint:deps:versions": {},
     "//#lint:deps:versions:fix": {
       "cache": false
