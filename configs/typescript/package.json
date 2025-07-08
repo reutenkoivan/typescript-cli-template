@@ -5,8 +5,7 @@
   "private": true,
   "license": "MIT",
   "exports": {
-    "./base.json": "./base.json",
-    "./documentation.json": "./documentation.json"
+    "./base.json": "./base.json"
   },
   "publishConfig": {
     "access": "public"

@@ -12,6 +12,14 @@ const config: Config = {
 	},
 	onBrokenLinks: "throw",
 	onBrokenMarkdownLinks: "warn",
+	themes: [
+		[
+			"@docusaurus/theme-classic",
+			{
+				customCss: "./src/css/custom.css",
+			},
+		],
+	],
 	plugins: [
 		"@docusaurus/plugin-content-docs",
 		[
@@ -29,12 +37,6 @@ const config: Config = {
 		],
 		"@docusaurus/plugin-svgr",
 		"@docusaurus/plugin-content-pages",
-		[
-			"@docusaurus/theme-classic",
-			{
-				customCss: "./src/css/custom.css",
-			},
-		],
 	],
 	tagline: "Dinosaurs are cool",
 	themeConfig: {

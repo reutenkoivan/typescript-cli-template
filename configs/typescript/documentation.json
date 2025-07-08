@@ -1,7 +1,0 @@
-{
-  "compilerOptions": {
-    "types": ["@docusaurus/module-type-aliases", "@docusaurus/theme-classic"]
-  },
-  "exclude": [".docusaurus", "build"],
-  "extends": "@docusaurus/tsconfig"
-}

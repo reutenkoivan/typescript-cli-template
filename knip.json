@@ -1,14 +1,11 @@
 {
-  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "$schema": "https://unpkg.com/knip@latest/schema-jsonc.json",
+  "biome": {},
+  "bun": {},
+  "docusaurus": {},
   "workspaces": {
     ".": {
       "ignoreBinaries": ["gitleaks"]
-    },
-    "configs/typescript": {
-      "ignoreUnresolved": ["@docusaurus/module-type-aliases", "@docusaurus/theme-classic"]
-    },
-    "packages/documentation": {
-      "ignoreDependencies": ["@theme/*", "@docusaurus/docusaurus-plugin-theme-classic"]
     }
   }
 }
