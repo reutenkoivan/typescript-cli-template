@@ -25,7 +25,7 @@
     "ink-cli:dev": "turbo run dev --filter=@repo/ink-cli..."
   },
   "devDependencies": {
-    "@biomejs/biome": "2.0.0",
+    "@biomejs/biome": "2.1.0",
     "knip": "^5.61.3",
     "lefthook": "^1.11.16",
     "madge": "^8.0.0",

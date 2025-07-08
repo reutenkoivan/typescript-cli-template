@@ -14,13 +14,13 @@
     "@repo/debug": "workspace:*",
     "@repo/file-system": "workspace:*",
     "@repo/logger": "workspace:*",
-    "commander": "^13.1.0",
-    "zod": "^3.25.48"
+    "commander": "^14.0.0",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@types/node": "20.14.0",
-    "tsdown": "^0.12.6",
+    "@types/node": "20.19.3",
+    "tsdown": "^0.12.9",
     "typescript": "5.8.3"
   },
   "engines": {
