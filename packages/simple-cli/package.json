@@ -21,7 +21,7 @@
     "@repo/tsdown-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/node": "20.19.3",
-    "tsdown": "^0.12.9",
+    "tsdown": "^0.14.1",
     "typescript": "5.8.3"
   },
   "engines": {

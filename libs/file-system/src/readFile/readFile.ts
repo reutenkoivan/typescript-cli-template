@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import { Result } from 'neverthrow'
-import { fileSystemDebug } from './_fileSystemDebug.js'
+import { fileSystemDebug } from '../_fileSystemDebug.js'
 
 const debug = fileSystemDebug.extend('readFile')
 

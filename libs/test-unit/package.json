@@ -1,0 +1,41 @@
+{
+  "name": "@repo/test-unit",
+  "version": "0.0.0-stub",
+  "license": "MIT",
+  "description": "Unit testing utilities and helpers for the CLI template.",
+  "scripts": {
+    "dev": "bun run build --watch",
+    "build": "tsdown --format cjs --format esm",
+    "lint:types": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@repo/tsdown-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@repo/vitest-config": "workspace:*",
+    "@types/node": "20.19.3",
+    "@vitest/coverage-v8": "^2.1.8",
+    "tsdown": "^0.14.1",
+    "typescript": "5.8.3",
+    "vitest": "^2.1.8"
+  },
+  "peerDependencies": {
+    "vitest": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "type": "module",
+  "exports": {
+    "./helpers": {
+      "import": "./dist/helpers.js",
+      "require": "./dist/helpers.cjs"
+    },
+    "./mocks": {
+      "import": "./dist/mocks.js",
+      "require": "./dist/mocks.cjs"
+    },
+    "./package.json": "./package.json"
+  }
+}

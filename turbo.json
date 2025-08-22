@@ -27,14 +27,12 @@
       "dependsOn": ["topo"]
     },
     "test": {
-      "dependsOn": ["^test"]
+      "dependsOn": ["@repo/test-unit#build", "@repo/vitest-config#build", "^test"]
     },
-    "test:ui": {
-      "cache": false,
-      "persistent": true
-    },
+
     "test:watch": {
       "cache": false,
+      "dependsOn": ["@repo/test-unit#build", "@repo/vitest-config#build"],
       "persistent": true
     },
     "topo": {

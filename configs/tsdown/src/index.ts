@@ -25,13 +25,13 @@ export const createConfig = (options: Options = {}) => {
   const shouldLog = process.env.TSDOWN_VERBOSE === 'true'
 
   // Compute final configuration
-  const finalConfig = {
+  const finalConfig: Options = {
     dts: true,
     exports: true,
     minify: isProduction,
     outDir: './dist',
     ...options,
-  }
+  } as const
 
   if (shouldLog) {
     logConfiguration(finalConfig, options, isProduction)

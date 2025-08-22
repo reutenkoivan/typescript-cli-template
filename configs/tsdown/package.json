@@ -13,7 +13,7 @@
   },
   "types": "./src/index.ts",
   "dependencies": {
-    "tsdown": "^0.12.9"
+    "tsdown": "^0.14.1"
   },
   "publishConfig": {
     "access": "public"

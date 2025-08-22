@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "dist",
     "types": ["node", "vitest/globals"]
   },
-  "exclude": ["node_modules", "dist"],
+  "exclude": ["dist", "node_modules"],
   "extends": "@repo/typescript-config/base.json",
-  "include": ["src"]
+  "include": ["src/**/*"]
 }

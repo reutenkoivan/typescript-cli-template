@@ -2,6 +2,7 @@ import { createConfig } from '@repo/tsdown-config'
 
 export default createConfig({
   entry: {
-    index: './src/logger.ts',
+    helpers: './src/helpers/index.ts',
+    mocks: './src/mocks/index.ts',
   },
 })

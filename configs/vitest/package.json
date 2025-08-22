@@ -1,8 +1,13 @@
 {
-  "name": "@repo/logger",
+  "name": "@repo/vitest-config",
   "version": "0.0.0-stub",
   "license": "MIT",
-  "description": "Debug package for the CLI template.",
+  "description": "Shared Vitest configuration for the CLI template monorepo.",
+  "keywords": [
+    "vitest",
+    "config",
+    "testing"
+  ],
   "scripts": {
     "dev": "bun run build --watch",
     "build": "tsdown --format cjs --format esm",
@@ -15,9 +20,8 @@
     "tsdown": "^0.14.1",
     "typescript": "5.8.3"
   },
-  "dependencies": {
-    "winston": "^3.17.0",
-    "zod": "^3.25.76"
+  "peerDependencies": {
+    "vitest": "^2.0.0"
   },
   "engines": {
     "node": ">=18.0.0"

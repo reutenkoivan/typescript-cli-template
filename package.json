@@ -22,16 +22,18 @@
     "build:production": "NODE_ENV=production TSDOWN_VERBOSE=true turbo run build",
     "check": "turbo run lint:code lint:deps lint:deps:versions lint:deps:graph --ui=stream",
     "check:fix": "turbo run lint:code:fix lint:deps:fix lint:deps:versions:fix --ui=stream",
+    "test": "turbo run test",
+    "test:watch": "turbo run test:watch",
     "doc:start": "turbo doc:start",
     "simple-cli:dev": "turbo run dev --filter=@repo/simple-cli...",
     "ink-cli:dev": "turbo run dev --filter=@repo/ink-cli..."
   },
   "devDependencies": {
-    "@biomejs/biome": "2.1.0",
-    "knip": "^5.61.3",
-    "lefthook": "^1.11.16",
+    "@biomejs/biome": "2.2.0",
+    "knip": "^5.63.0",
+    "lefthook": "^1.12.3",
     "madge": "^8.0.0",
     "sherif": "^1.6.1",
-    "turbo": "^2.5.4"
+    "turbo": "^2.5.6"
   }
 }

@@ -1,9 +1,9 @@
 import { err, ok } from 'neverthrow'
 import { z } from 'zod'
-import { fileSystemDebug } from './_fileSystemDebug.js'
-import { isFileExists } from './isFileExists.js'
-import { parseJson } from './parseJson.js'
-import { readFile } from './readFile.js'
+import { fileSystemDebug } from '../_fileSystemDebug.js'
+import { isFileExists } from '../isFileExists/index.js'
+import { parseJson } from '../parseJson/index.js'
+import { readFile } from '../readFile/readFile.js'
 
 export const basePackageJsonSchema = z.object({
   description: z.string(),

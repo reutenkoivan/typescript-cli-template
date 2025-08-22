@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { err, ok } from 'neverthrow'
-import { fileSystemDebug } from './_fileSystemDebug.js'
-import { getFileStats } from './getFileStats.js'
+import { fileSystemDebug } from '../_fileSystemDebug.js'
+import { getFileStats } from '../getFileStats/index.js'
 
 const debug = fileSystemDebug.extend('isFileExists')
 
