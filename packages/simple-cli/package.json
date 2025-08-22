@@ -18,6 +18,7 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@repo/tsdown-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/node": "20.19.3",
     "tsdown": "^0.12.9",

@@ -1,8 +1,5 @@
-import { defineConfig } from 'tsdown'
+import { createConfig } from '@repo/tsdown-config'
 
-export default defineConfig({
-  dts: true,
+export default createConfig({
   entry: ['./src/logger.ts'],
-  exports: true,
-  outDir: './dist',
 })

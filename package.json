@@ -18,6 +18,8 @@
     "lint:deps:graph": "madge ./libs/** ./configs/** ./packages/** --exclude .docusaurus,.turbo,static --circular --extensions ts,tsx",
     "lint:secrets": "gitleaks git -v",
     "#": "================================================================",
+    "build": "TSDOWN_VERBOSE=true turbo run build",
+    "build:production": "NODE_ENV=production TSDOWN_VERBOSE=true turbo run build",
     "check": "turbo run lint:code lint:deps lint:deps:versions lint:deps:graph --ui=stream",
     "check:fix": "turbo run lint:code:fix lint:deps:fix lint:deps:versions:fix --ui=stream",
     "doc:start": "turbo doc:start",

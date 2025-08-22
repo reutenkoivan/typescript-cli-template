@@ -1,11 +1,8 @@
-import { defineConfig } from 'tsdown'
+import { createConfig } from '@repo/tsdown-config'
 
-export default defineConfig({
-  dts: true,
+export default createConfig({
   entry: {
     'cat-command': './src/cat-command/index.ts',
     'simple-cli-init': './src/simple-cli-init.ts',
   },
-  exports: true,
-  outDir: './dist',
 })

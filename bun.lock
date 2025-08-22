@@ -12,6 +12,13 @@
         "turbo": "^2.5.4",
       },
     },
+    "configs/tsdown": {
+      "name": "@repo/tsdown-config",
+      "version": "0.0.0",
+      "dependencies": {
+        "tsdown": "^0.12.9",
+      },
+    },
     "configs/typescript": {
       "name": "@repo/typescript-config",
       "version": "0.0.0",
@@ -23,6 +30,7 @@
         "debug": "^4.4.1",
       },
       "devDependencies": {
+        "@repo/tsdown-config": "workspace:*",
         "@repo/typescript-config": "workspace:*",
         "@types/node": "20.19.3",
         "tsdown": "^0.12.9",
@@ -38,6 +46,7 @@
         "zod": "^3.25.76",
       },
       "devDependencies": {
+        "@repo/tsdown-config": "workspace:*",
         "@repo/typescript-config": "workspace:*",
         "@types/node": "20.19.3",
         "tsdown": "^0.12.9",
@@ -52,6 +61,7 @@
         "zod": "^3.25.76",
       },
       "devDependencies": {
+        "@repo/tsdown-config": "workspace:*",
         "@repo/typescript-config": "workspace:*",
         "@types/node": "20.19.3",
         "tsdown": "^0.12.9",
@@ -98,6 +108,7 @@
         "react": "^19.1.0",
       },
       "devDependencies": {
+        "@repo/tsdown-config": "workspace:*",
         "@repo/typescript-config": "workspace:*",
         "@types/node": "20.19.3",
         "tsdown": "^0.12.9",
@@ -118,6 +129,7 @@
         "zod": "^3.25.76",
       },
       "devDependencies": {
+        "@repo/tsdown-config": "workspace:*",
         "@repo/typescript-config": "workspace:*",
         "@types/node": "20.19.3",
         "tsdown": "^0.12.9",
@@ -571,6 +583,8 @@
     "@repo/logger": ["@repo/logger@workspace:libs/logger"],
 
     "@repo/simple-cli": ["@repo/simple-cli@workspace:packages/simple-cli"],
+
+    "@repo/tsdown-config": ["@repo/tsdown-config@workspace:configs/tsdown"],
 
     "@repo/typescript-config": ["@repo/typescript-config@workspace:configs/typescript"],
 

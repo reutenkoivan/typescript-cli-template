@@ -1,7 +1,6 @@
-import { defineConfig } from 'tsdown'
+import { createConfig } from '@repo/tsdown-config'
 
-export default defineConfig({
-  dts: true,
+export default createConfig({
   entry: {
     getFileStats: './src/getFileStats.ts',
     isFileExists: './src/isFileExists.ts',
@@ -9,6 +8,4 @@ export default defineConfig({
     parsePackageJson: './src/parsePackageJson.ts',
     readFile: './src/readFile.ts',
   },
-  exports: true,
-  outDir: './dist',
 })
