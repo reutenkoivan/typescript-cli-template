@@ -31,6 +31,15 @@ bun run ink-cli:dev
 
 # Start documentation
 bun run doc:start
+
+# Run tests
+turbo run test
+
+# Run tests with verbose configuration logging
+VITEST_VERBOSE=true turbo run test
+
+# Run tests with coverage enabled
+VITEST_COVERAGE=true turbo run test --filter=@repo/file-system
 ```
 
 ## Project Structure
@@ -38,11 +47,13 @@ bun run doc:start
 ```
 ├── configs/           # Shared configuration packages
 │   ├── tsdown/       # Build configuration
-│   └── typescript/   # TypeScript configuration
+│   ├── typescript/   # TypeScript configuration
+│   └── vitest/       # Vitest testing configuration
 ├── libs/             # Reusable library packages
 │   ├── debug/        # Debug logging utilities
 │   ├── file-system/  # File system operations
-│   └── logger/       # Structured logging with Winston
+│   ├── logger/       # Structured logging with Winston
+│   └── test-unit/    # Unit testing utilities and mocks
 ├── packages/         # Application packages
 │   ├── simple-cli/   # Basic CLI with Commander.js
 │   ├── ink-cli/      # Interactive CLI with React Ink
@@ -87,6 +98,13 @@ Structured logging with Winston:
 - Namespace-based loggers
 - Zod error formatting
 - Header formatting utilities
+
+### Test Unit (`@repo/test-unit`)
+Unit testing utilities and helpers:
+- `FsMocker` - File system mocking utilities for Vitest
+- `FileContentMock` - Content creation utilities for tests
+- Type-safe testing helpers
+- Organized into separate helpers and mocks exports
 
 ## Development
 

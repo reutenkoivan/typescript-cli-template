@@ -27,12 +27,14 @@
       "dependsOn": ["topo"]
     },
     "test": {
-      "dependsOn": ["@repo/test-unit#build", "@repo/vitest-config#build", "^test"]
+      "dependsOn": ["@repo/test-unit#build", "@repo/vitest-config#build", "^test"],
+      "passThroughEnv": ["VITEST_VERBOSE", "VITEST_COVERAGE"]
     },
 
     "test:watch": {
       "cache": false,
       "dependsOn": ["@repo/test-unit#build", "@repo/vitest-config#build"],
+      "passThroughEnv": ["VITEST_VERBOSE", "VITEST_COVERAGE"],
       "persistent": true
     },
     "topo": {

@@ -2,7 +2,7 @@
   "name": "@repo/vitest-config",
   "version": "0.0.0-stub",
   "license": "MIT",
-  "description": "Shared Vitest configuration for the CLI template monorepo.",
+  "description": "Shared Vitest configuration with type-safe presets and createConfig interface for the CLI template monorepo.",
   "keywords": [
     "vitest",
     "config",
@@ -18,10 +18,12 @@
     "@repo/typescript-config": "workspace:*",
     "@types/node": "20.19.3",
     "tsdown": "^0.14.1",
-    "typescript": "5.8.3"
+    "typescript": "5.8.3",
+    "vitest": "^3.2.4"
   },
   "peerDependencies": {
-    "vitest": "^2.0.0"
+    "@vitest/ui": "^3.2.4",
+    "vitest": "^3.2.4"
   },
   "engines": {
     "node": ">=18.0.0"

@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { fileSystemDebug } from '../_fileSystemDebug.js'
 import { isFileExists } from '../isFileExists/index.js'
 import { parseJson } from '../parseJson/index.js'
-import { readFile } from '../readFile/readFile.js'
+import { readFile } from '../readFile/index.js'
 
 export const basePackageJsonSchema = z.object({
   description: z.string(),

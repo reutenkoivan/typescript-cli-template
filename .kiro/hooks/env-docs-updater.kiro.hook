@@ -1,0 +1,29 @@
+{
+  "enabled": true,
+  "name": "Environment Variables Documentation Updater",
+  "description": "Monitors TypeScript source files, configuration files, package.json files, and documentation files for changes and triggers documentation updates specifically for environment variables in DEVELOPMENT.md",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.js",
+      "**/*.jsx",
+      "**/package.json",
+      "**/tsconfig.json",
+      "**/biome.json",
+      "**/turbo.json",
+      "**/knip.json",
+      "**/lefthook.yml",
+      "**/*.config.ts",
+      "**/*.config.js",
+      "**/*.md",
+      "**/*.mdx"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Files have been modified that may contain environment variable definitions or usage. Please analyze the changed files and update the DEVELOPMENT.md file with any new, modified, or removed environment variables. Focus specifically on:\n\n1. Environment variables used in TypeScript/JavaScript source code (process.env.*)\n2. Environment variables defined in configuration files\n3. Environment variables mentioned in package.json scripts\n4. Environment variables documented in README or other documentation files\n\nUpdate the environment variables section in DEVELOPMENT.md to reflect the current state of the codebase. Include variable names, descriptions, default values, and usage context."
+  }
+}

@@ -1,3 +1,3 @@
-import { presets } from '@repo/vitest-config'
+import { createConfig } from '@repo/vitest-config'
 
-export default presets.unit
+export default createConfig('unit')

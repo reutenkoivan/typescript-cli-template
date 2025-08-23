@@ -69,6 +69,7 @@ turbo run test:watch      # Run tests in watch mode
 - **Language**: TypeScript with strict configuration
 - **Module System**: ESM with CommonJS fallback
 - **Build Tool**: tsdown for dual ESM/CJS output
+- **Testing**: Vitest with shared configuration and presets
 - **Code Quality**: Biome for formatting and linting
 - **Error Handling**: neverthrow for functional error handling
 - **Validation**: Zod for schema validation
@@ -110,18 +111,83 @@ All packages follow consistent patterns:
 - TypeScript with declaration files
 - Workspace dependencies using `workspace:*`
 
+## Testing Configuration
+
+This template uses Vitest with a shared configuration package (`@repo/vitest-config`) that provides type-safe presets and configuration logging.
+
+### Available Presets
+- **`'unit'`** - Unit tests with optional coverage (enabled via `VITEST_COVERAGE=true`)
+- **`'integration'`** - Integration tests with extended timeout
+- **`'filesystem'`** - File system operation tests with mocking setup
+
+### Usage Examples
+```typescript
+// vitest.config.ts
+import { createConfig } from '@repo/vitest-config'
+
+// Use a preset
+export default createConfig('unit')
+export default createConfig('integration')
+export default createConfig('filesystem')
+
+// Use base configuration without preset
+export default createConfig()
+```
+
+### Custom Configuration with Presets
+```typescript
+// vitest.config.ts
+import { createConfig } from '@repo/vitest-config'
+
+// Unit tests with custom timeout
+export default createConfig('unit', {
+  test: {
+    testTimeout: 10000,
+    setupFiles: ['./custom-setup.ts'],
+  },
+})
+
+// Integration tests with custom patterns
+export default createConfig('integration', {
+  test: {
+    include: ['tests/**/*.e2e.{test,spec}.ts'],
+    testTimeout: 60000,
+  },
+})
+```
+
+### Configuration Logging
+Enable detailed configuration logging to see preset settings and merged configuration:
+```bash
+VITEST_VERBOSE=true turbo run test
+```
+
+Enable coverage collection for unit tests:
+```bash
+VITEST_COVERAGE=true turbo run test --filter=@repo/file-system
+```
+
+### Type Safety
+The preset parameter is type-safe and provides IDE autocomplete for available presets: `'unit'`, `'integration'`, `'filesystem'`. The function signature is:
+
+```typescript
+createConfig(preset?: 'unit' | 'integration' | 'filesystem', configOverrides?: ViteUserConfig)
+```
+
 ## Monorepo Organization
 
 ### `configs/`
 Shared configuration packages used across the monorepo:
 - `typescript/` - Base TypeScript configuration
 - `tsdown/` - Build configuration
+- `vitest/` - Vitest testing configuration with presets
 
 ### `libs/`
 Reusable utility libraries with focused responsibilities:
 - `debug/` - Debug logging utilities using the `debug` package
 - `file-system/` - File system operations and utilities
 - `logger/` - Structured logging with Winston
+- `test-unit/` - Unit testing utilities and mocks for Vitest
 
 ### `packages/`
 End-user applications and main deliverables:
@@ -143,6 +209,83 @@ End-user applications and main deliverables:
 - **Workspace Dependencies**: Use `workspace:*` for internal dependencies
 - **File Names**: kebab-case for files, PascalCase for classes
 - **Directory Names**: kebab-case consistently
+
+## Environment Variables
+
+The monorepo uses several environment variables to control build behavior, testing configuration, and CLI application settings.
+
+### Build Configuration
+
+#### `NODE_ENV`
+- **Purpose**: Controls build mode and optimizations
+- **Values**: `production` | `development` (default)
+- **Usage**: Automatically detected by build tools for environment-specific optimizations
+- **Example**: `NODE_ENV=production turbo run build --force --ui=stream`
+
+#### `TSDOWN_VERBOSE`
+- **Purpose**: Enable detailed logging for tsdown build configuration
+- **Values**: `true` | `false` (default)
+- **Usage**: Shows build configuration details, preset information, and merged settings
+- **Example**: `TSDOWN_VERBOSE=true turbo run build`
+- **Turborepo**: Passed through via `passThroughEnv` in build tasks
+
+### Testing Configuration
+
+#### `VITEST_VERBOSE`
+- **Purpose**: Enable detailed logging for Vitest configuration
+- **Values**: `true` | `false` (default)
+- **Usage**: Shows test configuration details, active presets, and merged settings
+- **Example**: `VITEST_VERBOSE=true turbo run test`
+- **Turborepo**: Passed through via `passThroughEnv` in test tasks
+
+#### `VITEST_COVERAGE`
+- **Purpose**: Enable coverage collection for unit tests
+- **Values**: `true` | `false` (default)
+- **Usage**: Activates coverage reporting in the 'unit' preset
+- **Example**: `VITEST_COVERAGE=true turbo run test --filter=@repo/file-system`
+- **Turborepo**: Passed through via `passThroughEnv` in test tasks
+
+### CLI Application Configuration
+
+#### `CAT_OUTPUT`
+- **Purpose**: Default output format for the cat command in simple-cli
+- **Values**: String (format specification)
+- **Usage**: Overrides default output format when set
+- **Location**: `packages/simple-cli/src/cat-command/cat-command-configuration.ts`
+
+#### `CAT_OUTPUT_FILE`
+- **Purpose**: Default output file path for the cat command in simple-cli
+- **Values**: String (file path)
+- **Usage**: Overrides default output file when set
+- **Location**: `packages/simple-cli/src/cat-command/cat-command-configuration.ts`
+
+### Environment Variable Usage Examples
+
+```bash
+# Production build with verbose logging
+NODE_ENV=production TSDOWN_VERBOSE=true turbo run build --force
+
+# Test with configuration logging and coverage
+VITEST_VERBOSE=true VITEST_COVERAGE=true turbo run test
+
+# Run specific package tests with verbose output
+VITEST_VERBOSE=true turbo run test --filter=@repo/file-system
+
+# Build specific package with verbose logging
+TSDOWN_VERBOSE=true turbo run build --filter=@repo/simple-cli
+
+# Run CLI with custom environment settings
+CAT_OUTPUT=json CAT_OUTPUT_FILE=output.json bun run simple-cli:dev
+```
+
+### Turborepo Environment Variable Handling
+
+The monorepo uses Turborepo's `passThroughEnv` configuration to ensure environment variables are properly passed to tasks:
+
+- **Build tasks**: `NODE_ENV`, `TSDOWN_VERBOSE`
+- **Test tasks**: `VITEST_VERBOSE`, `VITEST_COVERAGE`
+
+This ensures consistent environment variable handling across all packages and proper caching behavior.
 
 ## Import/Export Patterns
 

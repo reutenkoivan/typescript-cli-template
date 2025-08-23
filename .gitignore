@@ -15,6 +15,7 @@ node_modules
 # Build Outputs
 dist
 build
+coverage
 .docusaurus
 .cache-loader
 

@@ -1,59 +1,93 @@
-import { defineConfig } from 'vitest/config'
-import type { UserConfig } from 'vitest/node'
+import { defineConfig, type ViteUserConfig } from 'vitest/config'
 
-/**
- * Base Vitest test configuration
- */
-export const baseTestConfig: UserConfig = {
-  environment: 'node',
-  exclude: ['**/node_modules/**', '**/dist/**', '**/.turbo/**'],
-  globals: true,
-  include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+// Use ViteUserConfig which properly includes the test property
+type VitestConfig = ViteUserConfig
+
+const logConfiguration = (finalConfig: VitestConfig, configOverrides: VitestConfig, preset?: string) => {
+  const testConfig = finalConfig.test || {}
+
+  const configTable = [
+    { Setting: 'Preset', Value: preset || 'custom' },
+    { Setting: 'Environment', Value: testConfig.environment || 'node' },
+    { Setting: 'Globals', Value: testConfig.globals ? 'enabled' : 'disabled' },
+    { Setting: 'Coverage', Value: testConfig.coverage?.enabled ? 'enabled' : 'disabled' },
+    { Setting: 'Test Timeout', Value: `${testConfig.testTimeout || 5000}ms` },
+    { Setting: 'Include Patterns', Value: Array.isArray(testConfig.include) ? testConfig.include.length : 0 },
+    { Setting: 'Setup Files', Value: Array.isArray(testConfig.setupFiles) ? testConfig.setupFiles.length : 0 },
+    {
+      Setting: 'Custom Options',
+      Value: Object.keys(configOverrides).length > 0 ? Object.keys(configOverrides).join(', ') : 'none',
+    },
+  ]
+
+  console.log(`\n${'='.repeat(50)}`)
+  console.log('🧪 VITEST CONFIGURATION')
+  console.log('='.repeat(50))
+  console.table(configTable)
+  console.log(`${'='.repeat(50)}\n`)
 }
 
-/**
- * Create a Vitest config with optional test overrides
- */
-export function defineVitestConfig(testOverrides: UserConfig = {}) {
-  return defineConfig({
+// Base configuration
+const baseConfig: VitestConfig = {
+  test: {
+    environment: 'node',
+    exclude: ['**/node_modules/**', '**/dist/**', '**/.turbo/**'],
+    globals: true,
+    include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+  },
+}
+
+// Preset configurations
+const presetConfigs = {
+  filesystem: {
     test: {
-      ...baseTestConfig,
-      ...testOverrides,
+      include: ['src/**/*.{test,spec}.ts'],
+      setupFiles: ['./vitest.setup.ts'],
     },
-  })
-}
+  },
+  integration: {
+    test: {
+      include: ['tests/**/*.integration.{test,spec}.ts'],
+      testTimeout: 30000,
+    },
+  },
+  unit: {
+    test: {
+      coverage: {
+        enabled: process.env.VITEST_COVERAGE === 'true',
+        exclude: ['src/**/*.{test,spec}.ts'],
+        include: ['src/**/*.ts'],
+        reporter: ['text', 'html'],
+      },
+      include: ['src/**/*.{test,spec}.ts'],
+    },
+  },
+} satisfies Record<string, VitestConfig>
 
 /**
- * Preset configurations for common use cases
+ * Create a Vitest config with preset and optional overrides
  */
-export const presets = {
-  /**
-   * Configuration for packages with file system operations
-   */
-  filesystem: defineVitestConfig({
-    include: ['src/**/*.{test,spec}.ts'],
-    setupFiles: ['./vitest.setup.ts'],
-  }),
+export const createConfig = (preset?: keyof typeof presetConfigs, configOverrides: VitestConfig = {}) => {
+  const shouldLog = process.env.VITEST_VERBOSE === 'true'
 
-  /**
-   * Configuration for integration tests
-   */
-  integration: defineVitestConfig({
-    include: ['tests/**/*.integration.{test,spec}.ts'],
-    testTimeout: 30000,
-  }),
-  /**
-   * Configuration for unit tests
-   */
-  unit: defineVitestConfig({
-    coverage: {
-      exclude: ['src/**/*.{test,spec}.ts'],
-      include: ['src/**/*.ts'],
-      reporter: ['text', 'html'],
+  // Get preset config if specified
+  const presetConfig: Partial<VitestConfig> = preset ? presetConfigs[preset] || {} : {}
+
+  // Merge configurations: base -> preset -> overrides
+  const finalConfig: VitestConfig = {
+    ...baseConfig,
+    ...presetConfig,
+    ...configOverrides,
+    test: {
+      ...baseConfig.test,
+      ...presetConfig.test,
+      ...configOverrides.test,
     },
-    include: ['src/**/*.{test,spec}.ts'],
-  }),
-}
+  }
 
-// Default export for convenience
-export { defineVitestConfig as default }
+  if (shouldLog) {
+    logConfiguration(finalConfig, configOverrides, preset)
+  }
+
+  return defineConfig(finalConfig)
+}

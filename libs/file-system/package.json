@@ -16,10 +16,10 @@
     "@repo/typescript-config": "workspace:*",
     "@repo/vitest-config": "workspace:*",
     "@types/node": "20.19.3",
-    "@vitest/coverage-v8": "^2.1.8",
+    "@vitest/ui": "^3.2.4",
     "tsdown": "^0.14.1",
     "typescript": "5.8.3",
-    "vitest": "^2.1.8"
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "@repo/debug": "workspace:*",

@@ -4,7 +4,8 @@ Unit testing utilities and helpers for the CLI template monorepo.
 
 ## Features
 
-- **FsMock**: Centralized file system mocking utilities for Vitest tests
+- **FsMocker**: Centralized file system mocking utilities for Vitest tests
+- **FileContentMock**: Content creation utilities for test scenarios
 - **Type-safe**: Full TypeScript support with proper type definitions
 - **Easy to use**: Simple API for common testing scenarios
 
@@ -22,13 +23,13 @@ This package is part of the monorepo workspace. Add it as a dependency:
 
 ## Usage
 
-### FsMock Class
+### FsMocker Namespace
 
-The `FsMock` class provides utilities for mocking Node.js file system operations in your tests.
+The `FsMocker` namespace provides utilities for mocking Node.js file system operations in your tests.
 
 ```typescript
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { FsMock } from '@repo/test-unit/fs-mock'
+import { FsMocker } from '@repo/test-unit/helpers'
 import { yourFunction } from './your-module.js'
 
 // Mock the fs module
@@ -36,11 +37,11 @@ vi.mock('node:fs')
 
 describe('your tests', () => {
   beforeEach(() => {
-    FsMock.clearAllMocks()
+    FsMocker.clearAllMocks()
   })
 
   it('should handle existing files', () => {
-    FsMock.mockExistingFile('file content')
+    FsMocker.mockExistingFile('file content')
     
     const result = yourFunction('/path/to/file.txt')
     
@@ -48,7 +49,7 @@ describe('your tests', () => {
   })
 
   it('should handle non-existent files', () => {
-    FsMock.mockNonExistentFile()
+    FsMocker.mockNonExistentFile()
     
     const result = yourFunction('/path/to/missing.txt')
     
@@ -57,38 +58,63 @@ describe('your tests', () => {
 })
 ```
 
-### Available Methods
+### FileContentMock Namespace
+
+The `FileContentMock` namespace provides utilities for creating test content and data structures.
+
+```typescript
+import { FileContentMock } from '@repo/test-unit/mocks'
+
+// Create test package.json data
+const packageData = FileContentMock.createValidPackageJson({
+  name: '@scope/my-package',
+  version: '2.0.0'
+})
+
+// Create Buffer from string
+const buffer = FileContentMock.createBuffer('test content')
+```
+
+## Available Methods
+
+### FsMocker Methods
 
 #### Basic File Operations
-- `FsMock.mockFileStats(options)` - Mock file/directory stats
-- `FsMock.mockExistingFile(content)` - Mock a readable file
-- `FsMock.mockDirectory()` - Mock a directory
-- `FsMock.mockNonExistentFile()` - Mock file not found
-- `FsMock.mockEmptyFile()` - Mock an empty file
+- `FsMocker.mockFileStats(options)` - Mock file/directory stats
+- `FsMocker.mockExistingFile(content)` - Mock a readable file
+- `FsMocker.mockDirectory()` - Mock a directory
+- `FsMocker.mockNonExistentFile()` - Mock file not found
+- `FsMocker.mockEmptyFile()` - Mock an empty file
 
 #### Error Scenarios
-- `FsMock.mockPermissionDenied()` - Mock permission denied for stat
-- `FsMock.mockReadPermissionDenied()` - Mock permission denied for read
-- `FsMock.mockStatSyncError(message)` - Mock custom stat error
-- `FsMock.mockReadFileSyncError(message)` - Mock custom read error
+- `FsMocker.mockPermissionDenied()` - Mock permission denied for stat
+- `FsMocker.mockReadPermissionDenied()` - Mock permission denied for read
+- `FsMocker.mockStatSyncError(message)` - Mock custom stat error
+- `FsMocker.mockReadFileSyncError(message)` - Mock custom read error
 
 #### JSON Files
-- `FsMock.mockJsonFile(object)` - Mock valid JSON file
-- `FsMock.mockInvalidJsonFile()` - Mock malformed JSON
-- `FsMock.createValidPackageJson(overrides)` - Create package.json object
+- `FsMocker.mockJsonFile(object)` - Mock valid JSON file
+- `FsMocker.mockInvalidJsonFile()` - Mock malformed JSON
 
 #### Utilities
-- `FsMock.createBuffer(content)` - Create Buffer from string
-- `FsMock.clearAllMocks()` - Clear all mocks (use in beforeEach)
+- `FsMocker.clearAllMocks()` - Clear all mocks (use in beforeEach)
+
+### FileContentMock Methods
+
+#### Content Creation
+- `FileContentMock.createValidPackageJson(overrides)` - Create package.json object
+- `FileContentMock.createBuffer(content)` - Create Buffer from string
 
 ## Examples
 
 ### Testing File Reading
 
 ```typescript
+import { FsMocker } from '@repo/test-unit/helpers'
+
 it('should read file content', () => {
   const content = 'Hello, World!'
-  FsMock.mockExistingFile(content)
+  FsMocker.mockExistingFile(content)
   
   const result = readFile('/path/to/file.txt')
   
@@ -102,13 +128,16 @@ it('should read file content', () => {
 ### Testing Package.json Parsing
 
 ```typescript
+import { FsMocker } from '@repo/test-unit/helpers'
+import { FileContentMock } from '@repo/test-unit/mocks'
+
 it('should parse valid package.json', () => {
-  const packageData = FsMock.createValidPackageJson({
+  const packageData = FileContentMock.createValidPackageJson({
     name: '@scope/my-package',
     version: '2.0.0'
   })
   
-  FsMock.mockJsonFile(packageData)
+  FsMocker.mockJsonFile(packageData)
   
   const result = parsePackageJson('/path/to/package.json')
   
@@ -122,11 +151,22 @@ it('should parse valid package.json', () => {
 ### Testing Error Handling
 
 ```typescript
+import { FsMocker } from '@repo/test-unit/helpers'
+
 it('should handle permission errors', () => {
-  FsMock.mockPermissionDenied()
+  FsMocker.mockPermissionDenied()
   
   const result = checkFileExists('/restricted/file.txt')
   
   expect(result.isErr()).toBe(true)
 })
 ```
+
+## Package Structure
+
+The test-unit package is organized into two main exports:
+
+- **`@repo/test-unit/helpers`** - File system mocking utilities (`FsMocker`)
+- **`@repo/test-unit/mocks`** - Content creation utilities (`FileContentMock`)
+
+This separation allows you to import only the utilities you need for your specific test scenarios.
