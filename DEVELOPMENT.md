@@ -18,24 +18,21 @@ turbo run build
 
 #### Production Build
 ```bash
-NODE_ENV=production turbo run build --force --ui=stream
+NODE_ENV=production TSDOWN_VERBOSE=true turbo run build
 ```
-- **Force Fresh Builds**: Uses `--force` flag to bypass Turborepo cache
 - **Production Optimizations**: Minified output with smaller bundle sizes
 - **Environment Detection**: Automatically detects `NODE_ENV=production`
-- **Stream Output**: Real-time build progress with `--ui=stream`
+- **Verbose Logging**: Includes `TSDOWN_VERBOSE=true` for detailed build information
 - **Simplified Approach**: Uses existing build task with environment override
 
 ### Build Configuration Benefits
 
 1. **Environment-Aware**: Build tools automatically detect production mode via `NODE_ENV`
 2. **Optimized Output**: Production builds generate smaller, minified files
-3. **Cache Control**: Development builds use caching for speed, production builds bypass cache with `--force`
-4. **Visibility**: Stream UI provides real-time feedback during production builds
-5. **Simplified Architecture**: Single build task for both development and production
-6. **No Task Duplication**: Eliminates need for separate production build tasks
-7. **Consistent Dependencies**: Same dependency graph across all build modes
-8. **Fresh Builds**: `--force` flag ensures no stale cache affects production output
+3. **Verbose Logging**: Both development and production builds include detailed logging via `TSDOWN_VERBOSE`
+4. **Simplified Architecture**: Single build task for both development and production
+5. **No Task Duplication**: Eliminates need for separate production build tasks
+6. **Consistent Dependencies**: Same dependency graph across all build modes
 
 ## Available Scripts
 
@@ -46,8 +43,8 @@ bun run ink-cli:dev       # Start ink CLI in watch mode
 bun run doc:start         # Start documentation server
 
 # Building
-turbo run build                              # Build all packages (development mode)
-NODE_ENV=production turbo run build --force --ui=stream  # Build all packages (production mode, no cache)
+bun run build             # Build all packages (development mode with verbose logging)
+bun run build:production  # Build all packages (production mode with verbose logging)
 turbo run build --filter=@repo/simple-cli   # Build specific package
 
 # Code Quality
@@ -58,8 +55,8 @@ bun run lint:deps         # Dependency analysis
 bun run lint:secrets      # Secret detection
 
 # Testing
-turbo run test            # Run tests across all packages
-turbo run test:watch      # Run tests in watch mode
+bun run test              # Run tests across all packages
+bun run test:watch        # Run tests in watch mode
 ```
 
 ## Technology Stack
@@ -220,7 +217,7 @@ The monorepo uses several environment variables to control build behavior, testi
 - **Purpose**: Controls build mode and optimizations
 - **Values**: `production` | `development` (default)
 - **Usage**: Automatically detected by build tools for environment-specific optimizations
-- **Example**: `NODE_ENV=production turbo run build --force --ui=stream`
+- **Example**: `NODE_ENV=production TSDOWN_VERBOSE=true turbo run build`
 
 #### `TSDOWN_VERBOSE`
 - **Purpose**: Enable detailed logging for tsdown build configuration
@@ -263,7 +260,7 @@ The monorepo uses several environment variables to control build behavior, testi
 
 ```bash
 # Production build with verbose logging
-NODE_ENV=production TSDOWN_VERBOSE=true turbo run build --force
+NODE_ENV=production TSDOWN_VERBOSE=true turbo run build
 
 # Test with configuration logging and coverage
 VITEST_VERBOSE=true VITEST_COVERAGE=true turbo run test
